@@ -146,7 +146,7 @@ RUN cabal update \
 ENV GHC_PACKAGE_PATH="~/.cabal/store/ghc-${GHC_VER}/package.db:"
 
 # https://github.com/graalvm/graalvm-ce-builds/releases
-ARG GRAALVM=22.0.0.2
+ARG GRAALVM=22.1.0
 RUN wget --progress=dot:giga -O - \
 	https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM/graalvm-ce-java17-linux-amd64-$GRAALVM.tar.gz \
 	| tar -xz \
