@@ -148,10 +148,12 @@ ENV GHC_PACKAGE_PATH="~/.cabal/store/ghc-${GHC_VER}/package.db:"
 # https://github.com/graalvm/graalvm-ce-builds/releases
 ARG GRAALVM=22.1.0
 RUN wget --progress=dot:giga -O - \
-	https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM/graalvm-ce-java17-linux-amd64-$GRAALVM.tar.gz \
-	| tar -xz \
-	&& ln -s /opt/graalvm-ce-java17-$GRAALVM/bin/gu /usr/bin/gu
-RUN sudo gu install ruby \
+	https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM/graalvm-ce-java17-linux-amd64-$GRAALVM.tar.gz
+
+ARG GRAALVM=22.1.0
+RUN tar -x graalvm-ce-java17-linux-amd64-$GRAALVM.tar.gz && ln -s /opt/graalvm-ce-java17-22.1.0/bin/gu /usr/bin/gu
+
+RUN gu install ruby \
 	&& /opt/graalvm-ce-java17-$GRAALVM/languages/ruby/lib/truffle/post_install_hook.sh \
 	&& ln -s /opt/graalvm-ce-java17-$GRAALVM/bin/truffleruby /usr/bin/truffleruby
 
